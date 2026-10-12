@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Past Events | Guelph Tamil Society</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Tamil:wght@500;700;800&family=Mukta+Malar:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+:root{--maroon:#7a0f1e;--maroon-d:#4d0914;--gold:#e0a21a;--gold-l:#f4c95d;--green:#1f6b3a;--bg:#fff4dc;--card:#fffaf0;--ink:#2b1210;--muted:#6b4a3f}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font:400 17px/1.6 "Mukta Malar",system-ui,sans-serif}
+h1,h2{font-family:"Noto Serif Tamil",Georgia,serif;line-height:1.25;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+header{background:var(--maroon-d);color:#fbeccb;border-bottom:4px solid var(--gold);padding:18px 5vw}
+.head{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-family:"Noto Serif Tamil",serif;font-weight:700}
+.back{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 16px;border:1px solid var(--gold);border-radius:4px;text-decoration:none;color:var(--gold-l);font-weight:600}
+.back:hover{background:var(--gold);color:var(--maroon-d)}
+main{max-width:1200px;margin:auto;padding:48px 5vw 72px}
+h1{font-size:clamp(2rem,5vw,3rem);color:var(--maroon)}
+.rule{width:150px;height:10px;margin:14px 0 22px;background:repeating-linear-gradient(90deg,var(--gold) 0 6px,var(--maroon) 6px 10px,var(--green) 10px 14px,var(--maroon) 14px 18px)}
+.count{margin:0 0 18px;color:var(--muted)}
+.table-wrap{overflow-x:auto;border:2px solid var(--gold);border-radius:6px;background:var(--card)}
+table{width:100%;border-collapse:collapse;min-width:760px}
+th,td{padding:13px 15px;text-align:left;vertical-align:top;border-bottom:1px solid rgba(122,15,30,.14)}
+th{position:sticky;top:0;background:var(--maroon-d);color:var(--gold-l);font:700 .95rem "Noto Serif Tamil",Georgia,serif;white-space:nowrap}
+tbody tr:nth-child(even){background:rgba(224,162,26,.07)}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{min-width:150px;font-weight:700}
+.description{min-width:250px;max-width:440px}
+.date,.time{white-space:nowrap;font-weight:600}
+.date{width:88px;min-width:88px;max-width:88px;padding-left:9px;padding-right:9px}
+.ticket{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:7px 12px;background:var(--gold);border:1px solid var(--gold);border-radius:4px;color:var(--maroon-d);font-weight:700;text-decoration:none;white-space:nowrap}
+.ticket:hover{background:var(--gold-l)}
+.sold{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:7px 12px;border:1px solid rgba(122,15,30,.25);border-radius:4px;background:#f0e1cc;color:var(--muted);font:600 .95rem "Mukta Malar",sans-serif;white-space:nowrap}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+@media(max-width:640px){header{padding:14px 5vw}.head{align-items:flex-start;flex-direction:column;gap:10px}main{padding:34px 5vw 56px}th,td{padding:11px 12px}}
+@media(max-width:700px){
+  .table-wrap{overflow:visible;border:0;background:none}
+  table,tbody{display:block;width:100%;min-width:0}
+  thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  tbody tr{display:grid;grid-template-columns:minmax(0,1fr);margin:0 0 12px;border:1px solid var(--gold);border-radius:6px;background:var(--card)}
+  tbody td,tbody td:first-child,tbody td.description{display:grid;grid-template-columns:78px minmax(0,1fr);gap:10px;min-width:0;max-width:none;padding:8px 12px;overflow-wrap:anywhere;border-bottom:1px solid rgba(122,15,30,.14)}
+  tbody td:before{content:attr(data-label);font-weight:700;color:var(--green)}
+  tbody td.date{width:auto;min-width:0;max-width:none;white-space:normal}
+  tbody td:last-child{border-bottom:0}
+  tbody td.empty{display:block}
+  tbody td.empty:before{content:none}
+}
+@media(prefers-color-scheme:dark){:root{--bg:#2a0a10;--card:#3b1019;--ink:#fbeccb;--muted:#d9b99a}h1{color:var(--gold-l)}.table-wrap{border-color:var(--gold)}tbody tr:nth-child(even){background:rgba(244,201,93,.06)}th,td{border-bottom-color:rgba(244,201,93,.18)}.sold{background:#49282a;color:#fbeccb;border-color:#805057}}
+</style>
+</head>
+<body>
+<header><div class="head"><div class="brand">தமிழ் சமூகம் · Guelph Tamil Society</div><a class="back" href="guelph-tamil-society.html#events">Back to events</a></div></header>
+<main>
+  <h1>Past Events</h1>
+  <div class="rule" aria-hidden="true"></div>
+  <p class="count" id="count" aria-live="polite">Loading events…</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th scope="col">Event</th><th scope="col">Date</th><th scope="col">Time</th><th scope="col">Location</th><th scope="col">Description</th><th scope="col">Tickets</th></tr></thead>
+    <tbody id="events"><tr><td colspan="6" class="empty">Loading events…</td></tr></tbody>
+  </table></div>
+</main>
+<script>
+const SHEET_ID="1gkLEln3BDT_JG7IWfgbWX6rLuB9MN8qq_1CtJjYnEMk";
+const relationNamespace="http://schemas.openxmlformats.org/officeDocument/2006/relationships";
+const safeUrl=value=>/^https?:\/\//i.test(value||"");
+const parse=text=>new DOMParser().parseFromString(text,"application/xml");
+const norm=text=>String(text||"").toLowerCase().replace(/[^a-z]/g,"");
+const value=(cell,shared)=>{
+  if(!cell)return "";
+  const raw=cell.getElementsByTagNameNS("*","v")[0]?.textContent||"";
+  return cell.getAttribute("t")==="s"?(shared[Number(raw)]||"").trim():raw.trim();
+};
+const eventDateIsPast=value=>{
+  if(/\b(?:every|until|weekly|monthly|daily|each)\b/i.test(value||""))return false;
+  const date=new Date(value);
+  if(!Number.isFinite(date.getTime()))return false;
+  const today=new Date();
+  return Date.UTC(date.getFullYear(),date.getMonth(),date.getDate())<=Date.UTC(today.getFullYear(),today.getMonth(),today.getDate());
+};
+const dateText=(cell,shared)=>{
+  const raw=value(cell,shared),serial=Number(raw);
+  if(!raw||/\b(?:every|until|weekly|monthly|daily|each)\b/i.test(raw))return raw;
+  const date=cell.getAttribute("t")!=="s"&&serial>20000?new Date(Date.UTC(1899,11,30)+Math.floor(serial)*86400000):new Date(raw);
+  return Number.isFinite(date.getTime())?date.toLocaleDateString("en-US",{year:"2-digit",month:"short",day:"numeric",timeZone:"UTC"}):raw;
+};
+const dateOrder=(cell,shared)=>{
+  const raw=value(cell,shared),serial=Number(raw);
+  if(raw&&cell.getAttribute("t")!=="s"&&serial>20000)return Date.UTC(1899,11,30)+Math.floor(serial)*86400000;
+  if(/\b(?:every|until|weekly|monthly|daily|each)\b/i.test(raw))return null;
+  const parsed=Date.parse(raw);
+  return Number.isFinite(parsed)?parsed:null;
+};
+const textCell=(row,column,cells,shared)=>value(cells.get((column||"")+row),shared);
+function render(events){
+  const body=document.querySelector("#events");body.textContent="";
+  if(!events.length){body.innerHTML='<tr><td colspan="6" class="empty">No events posted yet.</td></tr>';document.querySelector("#count").textContent="0 events";return}
+  document.querySelector("#count").textContent=events.length+" events";
+  events.forEach(event=>{
+    const row=document.createElement("tr");
+    [["Event",event.title],["Date",event.date],["Time",event.time],["Location",event.location],["Description",event.description]].forEach(([label,text],index)=>{
+      const cell=document.createElement("td");cell.dataset.label=label;cell.textContent=text||"—";if(index===4)cell.className="description";if(index===1)cell.className="date";if(index===2)cell.className="time";row.append(cell);
+    });
+    const ticketCell=document.createElement("td");ticketCell.dataset.label="Tickets";
+    if(event.link&&eventDateIsPast(event.date)){const sold=document.createElement("span");sold.className="sold";sold.textContent="Sold out";ticketCell.append(sold)}
+    else if(event.link){const link=document.createElement("a");link.className="ticket";link.href=event.link;link.target="_blank";link.rel="noopener";link.textContent=event.button||"Get tickets";ticketCell.append(link)}
+    else ticketCell.textContent="—";
+    row.append(ticketCell);body.append(row);
+  });
+}
+async function loadEvents(){
+  const response=await fetch("https://docs.google.com/spreadsheets/d/"+SHEET_ID+"/export?format=xlsx",{cache:"no-store"});
+  if(!response.ok)throw new Error("Unable to load events");
+  const zip=await JSZip.loadAsync(await response.arrayBuffer());
+  const [workbookText,bookRelsText,sharedText]=await Promise.all([zip.file("xl/workbook.xml").async("text"),zip.file("xl/_rels/workbook.xml.rels").async("text"),zip.file("xl/sharedStrings.xml").async("text")]);
+  const workbook=parse(workbookText),bookRels=parse(bookRelsText),sharedDoc=parse(sharedText),shared=[...sharedDoc.getElementsByTagNameNS("*","si")].map(item=>[...item.getElementsByTagNameNS("*","t")].map(text=>text.textContent).join(""));
+  const tab=[...workbook.getElementsByTagNameNS("*","sheet")].find(sheet=>sheet.getAttribute("name").toLowerCase()==="event");
+  if(!tab)throw new Error("Event tab not found");
+  const tabRel=[...bookRels.getElementsByTagNameNS("*","Relationship")].find(rel=>rel.getAttribute("Id")===tab.getAttributeNS(relationNamespace,"id"));
+  if(!tabRel)throw new Error("Event tab data not found");
+  const target=tabRel.getAttribute("Target").replace(/^\//,"");
+  const sheetFile=target.startsWith("xl/")?target:"xl/"+target;
+  const relsFile=sheetFile.replace(/([^/]+)$/,"_rels/$1.rels");
+  const [sheetText,relsText]=await Promise.all([zip.file(sheetFile).async("text"),zip.file(relsFile)?.async("text")||Promise.resolve("")]);
+  const sheet=parse(sheetText),rels=relsText?parse(relsText):null,rows=[...sheet.getElementsByTagNameNS("*","row")],header=rows.find(row=>row.getAttribute("r")==="1");
+  if(!header)throw new Error("Event columns not found");
+  const cells=new Map([...sheet.getElementsByTagNameNS("*","c")].map(cell=>[cell.getAttribute("r"),cell]));
+  const columns=new Map([...header.getElementsByTagNameNS("*","c")].map(cell=>[norm(value(cell,shared)),cell.getAttribute("r").replace(/[0-9]/g,"")]));
+  const column=(...names)=>names.map(name=>columns.get(norm(name))).find(Boolean)||"";
+  const ticketTargets=new Map(rels?[...rels.getElementsByTagNameNS("*","Relationship")].map(rel=>[rel.getAttribute("Id"),rel.getAttribute("Target")]):[]);
+  const hyperlinks=new Map([...sheet.getElementsByTagNameNS("*","hyperlink")].map(link=>[link.getAttribute("ref"),ticketTargets.get(link.getAttributeNS(relationNamespace,"id"))]));
+  const events=rows.filter(row=>Number(row.getAttribute("r"))>1).map(row=>{
+    const rowNumber=row.getAttribute("r"),nameColumn=column("Name"),dateColumn=column("Date"),ticketColumn=column("Ticket link","TicketsLink");
+    const ticketCell=cells.get(ticketColumn+rowNumber),rawTicket=hyperlinks.get(ticketCell?.getAttribute("r"))||value(ticketCell,shared),ticket=safeUrl(rawTicket)?rawTicket:"";
+    return {title:textCell(rowNumber,nameColumn,cells,shared),description:textCell(rowNumber,column("Description"),cells,shared),location:textCell(rowNumber,column("Location"),cells,shared),date:dateText(cells.get(dateColumn+rowNumber),shared),time:textCell(rowNumber,column("Time"),cells,shared),link:ticket,button:textCell(rowNumber,column("ButtonText"),cells,shared),sortDate:dateOrder(cells.get(dateColumn+rowNumber),shared)};
+  }).filter(event=>event.title).sort((a,b)=>{
+    if(a.sortDate===null)return b.sortDate===null?0:1;
+    if(b.sortDate===null)return -1;
+    return b.sortDate-a.sortDate;
+  }).map(({sortDate,...event})=>event);
+  render(events);
+}
+loadEvents().catch(()=>{document.querySelector("#count").textContent="Events could not be loaded.";document.querySelector("#events").innerHTML='<tr><td colspan="6" class="empty">Please try again later.</td></tr>'});
+</script>
+</body>
+</html>
