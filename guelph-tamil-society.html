@@ -654,7 +654,7 @@ async function loadEventsFromSheet(){
 if(SHEET_ID&&window.JSZip)loadEventsFromSheet().catch(()=>{});
 
 if(SPONSOR_DRIVE){const f=mk("iframe","sdrive");f.src="https://drive.google.com/embeddedfolderview?id="+SPONSOR_DRIVE+"#grid";f.title="Our sponsors";f.loading="lazy";f.setAttribute("referrerpolicy","no-referrer");sp.after(f);const a=mk("a","small","Sponsor logos not showing? Open the folder in Google Drive.");a.href="https://drive.google.com/drive/folders/"+SPONSOR_DRIVE;a.target="_blank";a.rel="noopener";a.style.display="block";a.style.margin="10px 0 18px";f.after(a)}
-if(EMAIL){const a=mk("a","btn dk","Become a sponsor");a.href="mailto:"+EMAIL+"?subject=Sponsorship";$("#sponsorAction").append(a)}
+const sponsorLink=mk("a","btn dk","Become a sponsor");sponsorLink.href="sponsor.html";$("#sponsorAction").append(sponsorLink);
 (function(){
 const root=document.documentElement,reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
 const pr=$("#prog");
