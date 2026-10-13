@@ -97,6 +97,7 @@ footer p{margin:6px 0}
 .ev .btn:disabled:hover{background:var(--gold);color:var(--maroon-d)}
 .empty{grid-column:1/-1;border:2px dashed var(--gold);border-radius:8px;padding:34px;text-align:center;color:var(--muted)}
 .small{font-size:.88rem;color:var(--muted);max-width:52ch;margin:14px auto 0}
+.membership-notice{font-weight:700;animation:noticeBlink 1.2s steps(2,start) infinite}
 .btn.dk{background:var(--maroon);border-color:var(--maroon);color:#fff2d4}.btn.dk:hover{background:var(--maroon-d);color:var(--gold-l)}
 /* ---- Responsive: phones, tablets, laptops, large screens ---- */
 html{-webkit-text-size-adjust:100%}
@@ -169,6 +170,7 @@ footer .social{margin:4px 0 14px}
 @keyframes drift{to{background-position:80px 80px}}
 @keyframes slide{to{background-position:36px 0}}
 @keyframes glow{50%{box-shadow:0 0 24px rgba(244,201,93,.5)}}
+@keyframes noticeBlink{50%{visibility:hidden}}
 #prog{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-l));transform-origin:0 50%;transform:scaleX(0);z-index:20}
 .hero img{animation:pop 1s cubic-bezier(.2,.8,.2,1) both,float 6s ease-in-out 1.2s infinite}
 .hero h1{animation:up .9s .25s both}.hero .en{animation:up .9s .4s both}
@@ -253,12 +255,15 @@ button.feat,button.mini{cursor:pointer}
 .sslide .bd button:after{border-color:var(--gold);background:rgba(122,15,30,.35)}
 .sslide .bd button.on:after{background:var(--gold)}
 @media(max-width:700px){.sslide{height:340px}}
+header b{display:flex;align-items:center;gap:10px}
+.brand-mark{display:block;width:36px;height:36px;flex:none;object-fit:contain}
+@media(max-width:640px){header{flex-wrap:wrap;padding:5px 3vw}header b{display:flex;width:100%;justify-content:center;font-size:.9rem}nav{width:100%}html{scroll-padding-top:104px}}
 </style>
 </head>
 <body>
 <div id="prog" aria-hidden="true"></div>
 <header>
-  <b>தமிழ் சமூகம் · Guelph</b>
+  <b id="siteBrand"><span>தமிழ் சமூகம் · Guelph</span></b>
   <nav aria-label="Main"><a href="#about">About</a><a href="#focus">Our Work</a><a href="#board">Board</a><a href="#events">Events</a><a href="#gallery">Gallery</a><a href="#sponsors">Sponsors</a><a href="#donate">Donate</a><a href="#contact">Contact</a></nav>
 </header>
 
@@ -370,7 +375,6 @@ button.feat,button.mini{cursor:pointer}
   <div class="about">
     <div>
       <p class="lead">Have a question, an idea for an event, or want to volunteer? Reach out and the right director will follow up.</p>
-      <p id="contactAction"></p>
       <h3 class="sub" style="margin-top:28px">Call our executive team</h3>
       <ul class="phones">
         <li><span><b>Andrews Antony</b><small>President</small></span><a href="tel:+14388282759">+1 (438) 828-2759</a></li>
@@ -394,7 +398,7 @@ button.feat,button.mini{cursor:pointer}
   <h2>வணக்கம்! Come celebrate with us</h2><div class="rule"></div>
   <p class="lead" style="margin:0 auto 20px">Whether you are new to Guelph or have lived here for years, there is a place for you. Volunteer, bring your family, or share an idea with the board.</p>
   <p><a class="btn dk" href="#contact">Become a member or volunteer</a></p>
-  <p class="small">Membership details will be posted here soon.</p>
+  <p class="small membership-notice"><strong>Membership details will be posted here soon.</strong></p>
 </div></section>
 
 <div class="temple" aria-hidden="true" style="background-color:var(--maroon-d)"></div>
@@ -430,6 +434,8 @@ const SHEET_ID="1gkLEln3BDT_JG7IWfgbWX6rLuB9MN8qq_1CtJjYnEMk",SHEET_TAB="Sponser
 /* ================================================================= */
 const $=(s)=>document.querySelector(s);
 const mk=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const siteBrand=$("#siteBrand"),heroLogo=$(".hero img");
+if(siteBrand&&heroLogo){const logo=mk("img","brand-mark");logo.src=heroLogo.src;logo.alt="";siteBrand.prepend(logo)}
 const safe=(u)=>/^(https?:|mailto:)/i.test(u||"");
 const list=$("#eventList");
 function renderEvents(events){
@@ -461,10 +467,10 @@ function eventDateIsPast(value){
 renderEvents(EVENTS);
 const d=$("#donateAction");
 if(safe(DONATE_URL)){const a=mk("a","btn dk","Donate now");a.href=DONATE_URL;a.target="_blank";a.rel="noopener";d.append(a)}
-else d.append(mk("em","","Online donations are opening soon. Contact us to give in the meantime."));
-const ca=$("#contactAction");
-if(EMAIL){const a=mk("a","btn dk","Email us");a.href="mailto:"+EMAIL;ca.append(a);const t=$("#emailText");t.textContent="";const l=mk("a","",EMAIL);l.href="mailto:"+EMAIL;t.append(l)}
-else ca.append(mk("em","","Our contact email will be posted here soon."));
+else d.append(mk("em","","Online donations are opening soon. Contact Karthik (Treasurer) for additional details"));
+const emailText=$("#emailText");
+if(EMAIL){emailText.textContent="";const link=mk("a","",EMAIL);link.href="mailto:"+EMAIL;emailText.append(link)}
+else emailText.textContent="Our contact email will be posted here soon.";
 if(SOCIAL.length){const s=$("#socialText");s.textContent="";SOCIAL.forEach((x,i)=>{if(!safe(x.url))return;if(i)s.append(" · ");const a=mk("a","",x.name);a.href=x.url;a.target="_blank";a.rel="noopener";s.append(a)})}
 const okimg=(u)=>/^data:image\//.test(u||"");
 const bn=$("#banner");let bTimer,bStart=()=>{},bNext=()=>{},btx=0;
