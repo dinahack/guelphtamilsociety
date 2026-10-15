@@ -244,6 +244,7 @@ nav a.act{color:var(--gold-l)}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.js .rv{opacity:1;transform:none}}
 /* ---- Gallery albums + viewer ---- */
 #galleryList .feat{display:block;position:relative;width:100%;padding:0;border:3px double var(--gold);border-radius:10px;overflow:hidden;background:var(--maroon);text-align:left;color:inherit;font:inherit}
+.gallery-tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 18px}.gallery-tools label{font-weight:700;color:var(--maroon)}.gallery-tools select{padding:9px 12px;border:2px solid var(--gold);border-radius:6px;background:var(--card);color:inherit;font:inherit}.gallery-more{display:block;margin:18px auto 0}
 button.feat,button.mini{cursor:pointer}
 .feat img,.feat .ph-slot{width:100%;aspect-ratio:16/8;object-fit:cover;display:block}
 .cap{display:flex;flex-direction:column}
@@ -573,6 +574,30 @@ if(al.length){
   const mn=mk("div","minis");for(let i=0;i<3;i++){const m=mk("div","mini");m.append(mk("div","ph-slot","Photos coming soon"));const c2=mk("div","cap");c2.append(mk("b","","Another event"));m.append(c2);mn.append(m)}
   gl.append(mk("h3","sub","More events"),mn)
 }
+let galleryShowAll=false;
+function galleryDateParts(value){
+  const s=String(value||"").trim(),m=s.match(/([A-Za-z]{3,9})\s+(\d{4})/);
+  if(!m)return {month:"",year:""};
+  const months=["january","february","march","april","may","june","july","august","september","october","november","december"],month=months.findIndex(x=>x.startsWith(m[1].toLowerCase()))+1;
+  return {month:month?String(month).padStart(2,"0"):"",year:m[2]};
+}
+function renderGalleryList(){
+  gl.textContent="";
+  const months=["All months","January","February","March","April","May","June","July","August","September","October","November","December"],years=[...new Set(al.map(a=>galleryDateParts(a.date).year).filter(Boolean))].sort((a,b)=>b-a);
+  const tools=mk("div","gallery-tools"),monthLabel=mk("label","", "Month"),month=mk("select"),yearLabel=mk("label","", "Year"),year=mk("select");
+  month.setAttribute("aria-label","Filter gallery by month");year.setAttribute("aria-label","Filter gallery by year");
+  months.forEach((name,i)=>{const o=mk("option","",name);o.value=i?String(i).padStart(2,"0"):"";month.append(o)});
+  [""].concat(years).forEach(value=>{const o=mk("option","",value||"All years");o.value=value;year.append(o)});
+  month.value=renderGalleryList.month||"";year.value=renderGalleryList.year||"";
+  const update=()=>{renderGalleryList.month=month.value;renderGalleryList.year=year.value;galleryShowAll=false;renderGalleryList()};
+  month.onchange=update;year.onchange=update;tools.append(monthLabel,month,yearLabel,year);gl.append(tools);
+  const visible=al.filter(a=>{const d=galleryDateParts(a.date);return(!month.value||d.month===month.value)&&(!year.value||d.year===year.value)}),shown=galleryShowAll?visible:visible.slice(0,4);
+  if(!shown.length){gl.append(mk("div","empty","No gallery folders match this filter."));return}
+  gl.append(card(shown[0],"feat"));
+  if(shown.length>1){const mn=mk("div","minis");shown.slice(1).forEach(a=>mn.append(card(a,"mini")));gl.append(mk("h3","sub","More events"),mn)}
+  if(visible.length>4){const more=mk("button","btn gallery-more",galleryShowAll?"Show less":"More gallery");more.type="button";more.onclick=()=>{galleryShowAll=!galleryShowAll;renderGalleryList()};gl.append(more)}
+}
+
 async function loadGalleryFromSheet(){
   if(!SHEET_ID)return;
   const readTab=async tab=>{const r=await fetch("https://docs.google.com/spreadsheets/d/"+SHEET_ID+"/gviz/tq?tqx=out:json&sheet="+encodeURIComponent(tab));const t=await r.text(),m=t.match(/setResponse\((.*)\);?\s*$/s);if(!m)throw new Error("Invalid sheet response");return JSON.parse(m[1]).table||{cols:[],rows:[]}};
@@ -587,8 +612,8 @@ async function loadGalleryFromSheet(){
   if(detailNameIndex===-1)detailNameIndex=0;if(detailImageIndex===-1)detailImageIndex=1;
   const detailImages={};
   (details.rows||[]).slice(detailStart).forEach(row=>{const c=row?.c||[],name=value(c[detailNameIndex]),href=value(c[detailImageIndex]),id=driveId(href),src=id?"https://drive.google.com/thumbnail?id="+id+"&sz=w1600":href;if(name&&/^https?:\/\//i.test(src))(detailImages[name]||(detailImages[name]=[])).push(src);});
-  const albums=(gallery.rows||[]).slice(galleryStart).map(row=>{const c=row?.c||[],title=value(c[nameIndex]),href=value(c[coverIndex]),id=driveId(href),main=id?"https://drive.google.com/thumbnail?id="+id+"&sz=w1600":href,images=detailImages[title]||[];return title&&/^https?:\/\//i.test(main)?{title,cover:main,images,date:value(c[1]),note:images.length+(images.length===1?" photo":" photos")}:null;}).filter(Boolean);
-  if(albums.length){al=albums;gl.textContent="";gl.append(card(al[0],"feat"));if(al.length>1){const mn=mk("div","minis");al.slice(1).forEach(a=>mn.append(card(a,"mini")));gl.append(mk("h3","sub","More events"),mn);}}
+  const albums=(gallery.rows||[]).slice(galleryStart).map(row=>{const c=row?.c||[],title=value(c[nameIndex]),href=value(c[coverIndex]),id=driveId(href),main=id?"https://drive.google.com/thumbnail?id="+id+"&sz=w1600":href,images=detailImages[title]||[];return title&&/^https?:\/\//i.test(main)?{title,cover:main,images,date:String(c[1]?.f||value(c[1])).trim(),note:images.length+(images.length===1?" photo":" photos")}:null;}).filter(Boolean);
+  if(albums.length){al=albums;renderGalleryList();}
 }
 loadGalleryFromSheet().catch(()=>{});
 const sp=$("#sponsorList");
