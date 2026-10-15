@@ -82,6 +82,9 @@ h2{font-size:clamp(1.7rem,4vw,2.4rem);color:var(--maroon);margin-bottom:8px}
 .work-carousel{position:relative;margin:24px auto 0;padding:0 48px 34px;overflow:hidden}
 .work-track{display:flex;align-items:stretch;gap:18px;will-change:transform;transition:transform .65s cubic-bezier(.2,.8,.2,1)}
 .work-track .pc{flex:0 0 min(72vw,560px);min-height:210px;background:#fff8e6;color:#2b1210;border:0;border-radius:18px;padding:30px 34px;box-shadow:0 18px 34px rgba(0,0,0,.2);opacity:.34;transform:scale(.84);transition:opacity .65s ease,transform .65s ease,box-shadow .65s ease;display:flex;flex-direction:column;justify-content:center}
+.work-track .pc:has(.work-image){padding:0;overflow:hidden}
+.work-image{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.work-copy{padding:22px 30px 26px}
 .work-track .pc.is-active{opacity:1;transform:scale(1);box-shadow:0 22px 42px rgba(0,0,0,.3)}
 .work-track .pc h3{font-size:clamp(1.1rem,2vw,1.45rem);color:var(--maroon);margin-bottom:10px}
 .work-track .pc p{font-size:1rem;color:#51362e;line-height:1.6}
@@ -349,14 +352,14 @@ header b{display:flex;align-items:center;gap:10px}
   <div class="work-carousel" data-work-carousel aria-roledescription="carousel" aria-label="What we do">
     <button class="work-arrow work-prev" type="button" aria-label="Previous area">&#8249;</button>
     <div class="work-track">
-    <div class="pc"><h3>Cultural programs and festivals</h3><p>Indoor cultural programs and outdoor festivals and celebrations. Led by <b>Vignesh &amp; Ezhirpavai</b>.</p></div>
-    <div class="pc"><h3>Outreach and charity</h3><p>Community outreach and charity initiatives. Led by <b>Anand</b>.</p></div>
-    <div class="pc"><h3>Youth and sports</h3><p>Sports and activities for young people. Led by <b>Manoj</b>.</p></div>
-    <div class="pc"><h3>Kids and teens</h3><p>Programs for children and teenagers. Led by <b>Syed Rafi</b>.</p></div>
-    <div class="pc"><h3>Family and education</h3><p>Family and educational services. Led by <b>Chithra Saravanan</b>.</p></div>
-    <div class="pc"><h3>Recreation and wellness</h3><p>Healthy, active community life. Led by <b>Bala Chinnaian</b>.</p></div>
-    <div class="pc"><h3>Leadership and engagement</h3><p>Community engagement and leadership development. Led by <b>Manickvasagan</b>.</p></div>
-    <div class="pc"><h3>Venues and operations</h3><p>Venues and event operations. Led by <b>Pandurangan</b>.</p></div>
+    <div class="pc"><img class="work-image" src="cultural-programs.png" alt="Guelph Tamil Society cultural dance performance"><div class="work-copy"><h3>Cultural programs and festivals</h3><p>Indoor cultural programs and outdoor festivals and celebrations.</p></div></div>
+    <div class="pc"><img class="work-image" src="outreach-charity.png" alt="Guelph Tamil Society community outreach donation"><div class="work-copy"><h3>Outreach and charity</h3><p>Community outreach and charity initiatives.</p></div></div>
+    <div class="pc"><img class="work-image" src="youth-sports.png" alt="Guelph Tamil Society youth playing badminton"><div class="work-copy"><h3>Youth and sports</h3><p>Sports and activities for young people.</p></div></div>
+    <div class="pc"><img class="work-image" src="kids-teens.jpe" alt="Guelph Tamil Society kids and teens activity"><div class="work-copy"><h3>Kids and teens</h3><p>Programs for children and teenagers.</p></div></div>
+    <div class="pc"><img class="work-image" src="family-education.jpe" alt="Guelph Tamil Society family and education activity"><div class="work-copy"><h3>Family and education</h3><p>Family and educational services.</p></div></div>
+    <div class="pc"><img class="work-image" src="recreation-wellness.png" alt="Guelph Tamil Society recreation and wellness canoeing"><div class="work-copy"><h3>Recreation and wellness</h3><p>Healthy, active community life.</p></div></div>
+    <div class="pc"><img class="work-image" src="leadership-engagement.png" alt="Community leadership and engagement recognition event"><div class="work-copy"><h3>Leadership and engagement</h3><p>Community engagement and leadership development.</p></div></div>
+    <div class="pc"><img class="work-image" src="venues-operations.png" alt="Guelph Tamil Society community meeting"><div class="work-copy"><h3>Venues and operations</h3><p>Venues and event operations.</p></div></div>
     </div>
     <button class="work-arrow work-next" type="button" aria-label="Next area">&#8250;</button>
     <div class="work-dots" aria-label="Choose an area"></div>
