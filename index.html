@@ -589,8 +589,8 @@ function renderGalleryList(){
   months.forEach((name,i)=>{const o=mk("option","",name);o.value=i?String(i).padStart(2,"0"):"";month.append(o)});
   [""].concat(years).forEach(value=>{const o=mk("option","",value||"All years");o.value=value;year.append(o)});
   month.value=renderGalleryList.month||"";year.value=renderGalleryList.year||"";
-  const update=()=>{renderGalleryList.month=month.value;renderGalleryList.year=year.value;galleryShowAll=false;renderGalleryList()};
-  month.onchange=update;year.onchange=update;tools.append(monthLabel,month,yearLabel,year);gl.append(tools);
+  const update=()=>{renderGalleryList.month=month.value;renderGalleryList.year=year.value;renderGalleryList()};
+  month.onchange=update;year.onchange=update;tools.append(monthLabel,month,yearLabel,year);tools.hidden=!galleryShowAll;gl.append(tools);
   const visible=al.filter(a=>{const d=galleryDateParts(a.date);return(!month.value||d.month===month.value)&&(!year.value||d.year===year.value)}),shown=galleryShowAll?visible:visible.slice(0,4);
   if(!shown.length){gl.append(mk("div","empty","No gallery folders match this filter."));return}
   gl.append(card(shown[0],"feat"));
