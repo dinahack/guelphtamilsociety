@@ -602,7 +602,7 @@ function renderGalleryList(){
 async function loadGalleryFromSheet(){
   if(!SHEET_ID)return;
   const readTab=async tab=>{const r=await fetch("https://docs.google.com/spreadsheets/d/"+SHEET_ID+"/gviz/tq?tqx=out:json&sheet="+encodeURIComponent(tab));const t=await r.text(),m=t.match(/setResponse\((.*)\);?\s*$/s);if(!m)throw new Error("Invalid sheet response");return JSON.parse(m[1]).table||{cols:[],rows:[]}};
-  const value=c=>String(c?.v??c?.f??"").trim();
+  const value=c=>String(c?.v??c?.f??"").trim(),linkValue=c=>String(c?.l??c?.v??c?.f??"").trim();
   const [gallery,details]=await Promise.all([readTab(GALLERY_TAB),readTab(GALLERY_DETAILS_TAB)]);
   const column=(table,names)=>table.cols.findIndex(c=>names.some(n=>new RegExp(n,"i").test(c?.label||"")));
   let nameIndex=column(gallery,["name","gallery"]),coverIndex=column(gallery,["imagelink","image","cover"]),driveIndex=column(gallery,["drivelink","drive","folderlink"]),galleryStart=0;
@@ -613,7 +613,7 @@ async function loadGalleryFromSheet(){
   if(detailNameIndex===-1)detailNameIndex=0;if(detailImageIndex===-1)detailImageIndex=1;
   const detailImages={};
   (details.rows||[]).slice(detailStart).forEach(row=>{const c=row?.c||[],name=value(c[detailNameIndex]),href=value(c[detailImageIndex]),id=driveId(href),src=id?"https://drive.google.com/thumbnail?id="+id+"&sz=w1600":href;if(name&&/^https?:\/\//i.test(src))(detailImages[name]||(detailImages[name]=[])).push(src);});
-  const albums=(gallery.rows||[]).slice(galleryStart).map(row=>{const c=row?.c||[],title=value(c[nameIndex]),href=value(c[coverIndex]),drive=value(c[driveIndex]),id=driveId(href),main=id?"https://drive.google.com/thumbnail?id="+id+"&sz=w1600":href,images=detailImages[title]||[];return title&&/^https?:\/\//i.test(main)?{title,cover:main,drive:validLink(drive)?drive:"",images,date:String(c[1]?.f||value(c[1])).trim(),note:images.length+(images.length===1?" photo":" photos")}:null;}).filter(Boolean);
+  const albums=(gallery.rows||[]).slice(galleryStart).map(row=>{const c=row?.c||[],title=value(c[nameIndex]),href=value(c[coverIndex]),drive=linkValue(c[driveIndex]),id=driveId(href),main=id?"https://drive.google.com/thumbnail?id="+id+"&sz=w1600":href,images=detailImages[title]||[];return title&&/^https?:\/\//i.test(main)?{title,cover:main,drive:validLink(drive)?drive:"",images,date:String(c[1]?.f||value(c[1])).trim(),note:images.length+(images.length===1?" photo":" photos")}:null;}).filter(Boolean);
   if(albums.length){al=albums;renderGalleryList();}
 }
 loadGalleryFromSheet().catch(()=>{});
