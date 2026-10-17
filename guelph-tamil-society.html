@@ -544,7 +544,7 @@ let cur=null,ix=0,last=null;
 function show(i){const m=imgs(cur);if(!m.length)return;ix=(i+m.length)%m.length;L.img.src=m[ix];L.img.alt=cur.title+", photo "+(ix+1);L.n.textContent=(ix+1)+" of "+m.length;[...L.th.children].forEach((b,j)=>b.classList.toggle("on",j===ix));const c=L.th.children[ix];if(c)L.th.scrollTo({left:c.offsetLeft-L.th.clientWidth/2+c.clientWidth/2,behavior:"smooth"})}
 function openAlbum(a){cur=a;last=document.activeElement;L.t.textContent=a.title;L.th.textContent="";
   imgs(a).forEach((src,j)=>{const b=mk("button");b.type="button";b.setAttribute("aria-label","Photo "+(j+1));const t=mk("img");t.src=src;t.alt="";b.append(t);b.onclick=()=>show(j);L.th.append(b)});
-  if(safe(a.drive)){L.dr.href=a.drive;L.dr.hidden=false}else L.dr.hidden=true;
+  if(safe(a.drive)){L.dr.href=a.drive;L.dr.textContent=a.title+" Full Gallery";L.dr.hidden=false}else L.dr.hidden=true;
   lb.hidden=false;document.body.style.overflow="hidden";
   if(imgs(a).length)show(0);else{L.img.removeAttribute("src");L.n.textContent="Photos coming soon"}
   lb.querySelector(".pv").hidden=lb.querySelector(".nx").hidden=imgs(a).length<2;
