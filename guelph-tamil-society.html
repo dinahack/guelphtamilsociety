@@ -738,8 +738,10 @@ async function loadEventsFromSheet(){
     if(a.sortDate===null)return b.sortDate===null?0:1;
     if(b.sortDate===null)return -1;
     return b.sortDate-a.sortDate;
-  }).map(({sortDate,...event})=>event);
-  renderEvents(events);
+  });
+  const monthlyIndex=events.findIndex(event=>/monthly\s+meeting/i.test(event.title));
+  if(monthlyIndex!==-1&&events.length>1){const [monthlyMeeting]=events.splice(monthlyIndex,1);events.splice(1,0,monthlyMeeting)}
+  renderEvents(events.map(({sortDate,...event})=>event));
 }
 if(SHEET_ID&&window.JSZip)loadEventsFromSheet().catch(()=>{});
 function ensurePopupHost(){
