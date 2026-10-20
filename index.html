@@ -353,13 +353,16 @@ nav a:hover,nav a:focus-visible,nav a.act{background:var(--gold-l);color:var(--m
 @media(max-width:700px){.newcomer-cta{width:100%;min-width:0;padding:clamp(10px,3vw,14px) clamp(12px,4vw,18px)}}
 .btns > a[href="#join"],.btns > a[href="#events"]{font-size:clamp(1rem,4.8vw,1.35rem);padding:clamp(10px,3vw,14px) clamp(12px,4vw,18px)}
 .btns > a[href="#board"]{display:none}
+.nav-toggle{display:none;border:1px solid rgba(255,200,69,.5);border-radius:999px;background:rgba(255,248,230,.1);color:#fbeccb;padding:8px 12px;font:700 .85rem/1 system-ui,sans-serif;align-items:center;gap:6px;cursor:pointer}
+@media(max-width:700px){header #siteBrand{width:auto;flex:1;justify-content:flex-start}.nav-toggle{display:inline-flex}header nav{display:none}body.nav-open header nav{display:flex;flex-direction:column;align-items:stretch;gap:4px;width:100%;overflow:visible;padding:6px;border-radius:14px}body.nav-open header nav a{justify-content:center;width:100%;min-height:42px}}
 </style>
 </head>
 <body id="top">
 <div id="prog" aria-hidden="true"></div>
 <header>
   <a id="siteBrand" href="#top" aria-label="Go to the top of the page"><span>தமிழ் சமூகம் · Guelph</span></a>
-  <nav aria-label="Main"><a href="#about">About</a><a href="#focus">Our Work</a><a href="#board">Board</a><a href="#events">Events</a><a href="#gallery">Gallery</a><a href="#sponsors">Sponsors</a><a href="#donate">Donate</a><a href="#contact">Contact</a></nav>
+  <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="mainNav"><span aria-hidden="true">☰</span><span>Menu</span></button>
+  <nav id="mainNav" aria-label="Main"><a href="#about">About</a><a href="#focus">Our Work</a><a href="#board">Board</a><a href="#events">Events</a><a href="#gallery">Gallery</a><a href="#sponsors">Sponsors</a><a href="#donate">Donate</a><a href="#contact">Contact</a></nav>
 </header>
 
 <div class="hero">
@@ -918,6 +921,13 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return
   setTimeout(()=>el.classList.remove("rv","in"),1500)}),{threshold:.12,rootMargin:"0px 0px -6% 0px"});
 els.forEach(el=>{const i=[...el.parentNode.children].indexOf(el);el.style.setProperty("--d",Math.min(i,7)*.08+"s");el.classList.add("rv");io.observe(el)});
 })();
+</script>
+<script>
+const navToggle=document.querySelector("#navToggle"),mainNav=document.querySelector("#mainNav");
+if(navToggle&&mainNav){
+  navToggle.addEventListener("click",()=>{const open=document.body.classList.toggle("nav-open");navToggle.setAttribute("aria-expanded",String(open));navToggle.querySelector("span:last-child").textContent=open?"Close":"Menu"});
+  mainNav.addEventListener("click",event=>{if(event.target.closest("a")){document.body.classList.remove("nav-open");navToggle.setAttribute("aria-expanded","false");navToggle.querySelector("span:last-child").textContent="Menu"}});
+}
 </script>
 </body>
 </html>
