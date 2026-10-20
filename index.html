@@ -496,7 +496,7 @@ nav a:hover,nav a:focus-visible,nav a.act{background:var(--gold-l);color:var(--m
 <section class="join" id="join"><div>
   <h2>வணக்கம்! Come celebrate with us</h2><div class="rule"></div>
   <p class="lead" style="margin:0 auto 20px">Whether you are new to Guelph or have lived here for years, there is a place for you. Volunteer, bring your family, or share an idea with the board.</p>
-  <div class="join-actions"><p><a class="btn dk" href="#contact">Become a member or volunteer</a></p><p><a class="btn o" href="https://chat.whatsapp.com/HtTKSJjdopK4EZY7EdzTNa?s=cl&amp;p=i&amp;mlu=0&amp;ilr=4" target="_blank" rel="noopener">Join our WhatsApp group</a></p></div>
+  <div class="join-actions"><p><a class="btn o" href="https://chat.whatsapp.com/HtTKSJjdopK4EZY7EdzTNa?s=cl&amp;p=i&amp;mlu=0&amp;ilr=4" target="_blank" rel="noopener">Join our WhatsApp group</a></p></div>
   <p class="small membership-notice"><strong>Membership details will be posted here soon.</strong></p>
 </div></section>
 
@@ -566,7 +566,7 @@ function eventDateIsPast(value){
 renderEvents(EVENTS);
 const d=$("#donateAction");
 if(safe(DONATE_URL)){const a=mk("a","btn dk","Donate now");a.href=DONATE_URL;a.target="_blank";a.rel="noopener";d.append(a)}
-else d.append(mk("em","","Online donations are opening soon. Contact Karthik (Treasurer) for additional details"));
+else d.textContent="";
 const emailText=$("#emailText");
 if(EMAIL){emailText.textContent="";const link=mk("a","",EMAIL);link.href="mailto:"+EMAIL;emailText.append(link)}
 else emailText.textContent="Our contact email will be posted here soon.";
