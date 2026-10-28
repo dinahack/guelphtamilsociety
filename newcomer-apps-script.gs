@@ -1,5 +1,5 @@
 const NEWCOMER_SHEET_NAME = 'NewComer';
-const NEWCOMER_NOTIFICATION_EMAIL = 'dineshmkvp@gmail.com';
+const NEWCOMER_NOTIFICATION_EMAIL = 'newtoguelph@guelphtamilsociety.com';
 
 const NEWCOMER_HEADERS = [
   'Timestamp',
